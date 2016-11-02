@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d2071bb6ed2940fc82004569306093f5" Name="Diagram1" DisplayType="true" >
+        <EntityTypeShape EntityType="db.User" Width="1.5" PointX="3" PointY="2.5" />
+        <EntityTypeShape EntityType="db.Post" Width="1.5" PointX="5.25" PointY="0.5" />
+        <EntityTypeShape EntityType="db.Category" Width="1.5" PointX="7.75" PointY="0.5" />
+        <EntityTypeShape EntityType="db.Comment" Width="1.5" PointX="9" PointY="2.625" />
+        <EntityTypeShape EntityType="db.UserType" Width="1.5" PointX="3" PointY="0.5" />
+        <EntityTypeShape EntityType="db.Payment" Width="1.5" PointX="10.5" PointY="0.75" />
+        <EntityTypeShape EntityType="db.Log" Width="1.5" PointX="7.125" PointY="3.75" />
+        <EntityTypeShape EntityType="db.Project" Width="1.5" PointX="0.5" PointY="0.5" />
+        <AssociationConnector Association="db.UserPost" />
+        <AssociationConnector Association="db.PostCategory" />
+        <AssociationConnector Association="db.PostComment" />
+        <AssociationConnector Association="db.CommentUser" />
+        <AssociationConnector Association="db.UserLog" />
+        <AssociationConnector Association="db.UserPayment" />
+        <AssociationConnector Association="db.UserProject" />
+        <AssociationConnector Association="db.UserUserType" />
+        <EntityTypeShape EntityType="db.ProjectAccess" Width="1.5" PointX="1" PointY="3.5" />
+        <AssociationConnector Association="db.ProjectProjectAccess" />
+        <AssociationConnector Association="db.UserProjectAccess" />
+        <AssociationConnector Association="db.ProjectAccessPayment" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
