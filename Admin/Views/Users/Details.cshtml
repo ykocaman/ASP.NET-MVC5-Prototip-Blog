@@ -39,7 +39,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Avatar)
+            <img src="@Url.Action("Avatar",new{@id = Model.Id})" />
         </dd>
 
         <dt>

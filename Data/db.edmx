@@ -69,7 +69,7 @@
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Mail" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Avatar" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Avatar" Type="varbinary(max)" Nullable="true" />
   </EntityType>
   <EntityType Name="PostSet">
     <Key>
@@ -114,7 +114,7 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="UserId" Type="int" Nullable="false" />
-    <Property Name="Amount" Type="decimal" Nullable="false" />
+    <Property Name="Amount" Type="decimal" Nullable="false" Precision="18" Scale="2" />
     <Property Name="Date" Type="datetime" Nullable="false" />
     <Property Name="ProjectAccess_Id" Type="int" Nullable="false" />
   </EntityType>
@@ -136,8 +136,9 @@
     <Property Name="UserId" Type="int" Nullable="false" />
     <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Text" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Link" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Price" Type="decimal" Nullable="false" />
+    <Property Name="File" Type="varbinary(max)" Nullable="true" />
+    <Property Name="ContentType" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Price" Type="decimal" Nullable="false" Precision="18" Scale="2" />
   </EntityType>
   <EntityType Name="ProjectAccessSet">
     <Key>
@@ -354,7 +355,7 @@
           <Property Name="Name" Type="String" Nullable="false" />
           <Property Name="Mail" Type="String" Nullable="false" />
           <Property Name="Password" Type="String" Nullable="false" />
-          <Property Name="Avatar" Type="String" Nullable="false" />
+          <Property Name="Avatar" Type="Binary" Nullable="true" />
         </EntityType>
         <EntityType Name="Post">
           <Key>
@@ -408,7 +409,7 @@
           <NavigationProperty Name="User" Relationship="db.UserPayment" FromRole="Payment" ToRole="User" />
           <Property Name="UserId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="ProjectAccess" Relationship="db.ProjectAccessPayment" FromRole="Payment" ToRole="ProjectAccess" />
-          <Property Name="Amount" Type="Decimal" Nullable="false" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="Date" Type="DateTime" Nullable="false" />
         </EntityType>
         <EntityType Name="Log">
@@ -432,8 +433,9 @@
           <NavigationProperty Name="ProjectAccess" Relationship="db.ProjectProjectAccess" FromRole="Project" ToRole="ProjectAccess" />
           <Property Name="Title" Type="String" Nullable="false" />
           <Property Name="Text" Type="String" Nullable="false" />
-          <Property Name="Link" Type="String" Nullable="false" />
-          <Property Name="Price" Type="Decimal" Nullable="false" />
+          <Property Name="File" Type="Binary" Nullable="true" />
+          <Property Name="ContentType" Type="String" Nullable="true" />
+          <Property Name="Price" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
         </EntityType>
         <Association Name="UserPost">
           <End Type="db.User" Role="User" Multiplicity="1" />
@@ -657,7 +659,8 @@
           <ScalarProperty Name="UserId" ColumnName="UserId" />
           <ScalarProperty Name="Title" ColumnName="Title" />
           <ScalarProperty Name="Text" ColumnName="Text" />
-          <ScalarProperty Name="Link" ColumnName="Link" />
+          <ScalarProperty Name="File" ColumnName="File" />
+          <ScalarProperty Name="ContentType" ColumnName="ContentType" />
           <ScalarProperty Name="Price" ColumnName="Price" />
         </MappingFragment>
       </EntityTypeMapping>

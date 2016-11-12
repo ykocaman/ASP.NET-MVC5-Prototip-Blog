@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Data;
+using Admin.Helpers;
+using System.Drawing.Imaging;
 
 namespace Admin.Controllers
 {
@@ -48,10 +50,18 @@ namespace Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,UserTypeId,Name,Mail,Password,Avatar")] User user)
+        public ActionResult Create([Bind(Include = "Id,UserTypeId,Name,Mail,Password")] User user, HttpPostedFileBase Avatar)
         {
             if (ModelState.IsValid)
             {
+                if (Avatar != null && Avatar.ContentLength > 0)
+                {
+                    using (var reader = new System.IO.BinaryReader(Avatar.InputStream))
+                    {
+                        user.Avatar = reader.ReadBytes(Avatar.ContentLength);
+                    }
+                }
+
                 db.UserSet.Add(user);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -82,11 +92,24 @@ namespace Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,UserTypeId,Name,Mail,Password,Avatar")] User user)
+        public ActionResult Edit([Bind(Include = "Id,UserTypeId,Name,Mail,Password")] User user, HttpPostedFileBase Avatar)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(user).State = EntityState.Modified;
+
+                if (Avatar != null && Avatar.ContentLength > 0)
+                {
+                    using (var reader = new System.IO.BinaryReader(Avatar.InputStream))
+                    {
+                        user.Avatar = reader.ReadBytes(Avatar.ContentLength);
+                    }
+                }
+                else
+                {
+                    db.Entry(user).Property("Avatar").IsModified = false;
+                }
+                
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -127,6 +150,16 @@ namespace Admin.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public ActionResult Avatar(int id)
+        {
+            byte[] file = db.UserSet.Find(id).Avatar;
+            if (file == null)
+            {
+                return Content("Resim bulunamadı");
+            }
+            return File(file,ImageHelper.GetContentType(file).ToString());
         }
     }
 }

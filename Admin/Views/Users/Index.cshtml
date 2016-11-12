@@ -41,8 +41,7 @@
             @Html.DisplayFor(modelItem => item.Password)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Avatar)
-        </td>
+            <img src="@Url.Action("Avatar",new{@id = item.Id})" width="100" /> 
         <td>
             @Html.DisplayFor(modelItem => item.UserType.Title)
         </td>

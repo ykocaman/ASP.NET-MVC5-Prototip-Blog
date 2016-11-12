@@ -1,0 +1,21 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<button class="btn btn-danger">Ajax getir</button>
+
+<div id="result"></div>
+
+@section js{
+    <script>
+        $("button").click(function () {
+            $.ajax({
+                url: "/Home/Api", success: function (result) {
+                    $("#result").text(JSON.stringify(result));
+                }
+            });
+        });
+    </script>
+}

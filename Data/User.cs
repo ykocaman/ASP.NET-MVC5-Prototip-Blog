@@ -29,7 +29,7 @@ namespace Data
         public string Name { get; set; }
         public string Mail { get; set; }
         public string Password { get; set; }
-        public string Avatar { get; set; }
+        public byte[] Avatar { get; set; }
     
         public virtual ICollection<Post> Post { get; set; }
         public virtual ICollection<Comment> Comment { get; set; }

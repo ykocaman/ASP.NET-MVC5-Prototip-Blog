@@ -49,6 +49,7 @@ namespace Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public ActionResult Create([Bind(Include = "Id,UserId,CategoryId,Title,Text,Date")] Post post)
         {
             if (ModelState.IsValid)
@@ -85,6 +86,7 @@ namespace Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public ActionResult Edit([Bind(Include = "Id,UserId,CategoryId,Title,Text,Date")] Post post)
         {
             if (ModelState.IsValid)

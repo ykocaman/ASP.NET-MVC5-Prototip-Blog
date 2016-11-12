@@ -15,10 +15,10 @@
             @Html.DisplayNameFor(model => model.Title)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Text)
+            @Html.DisplayNameFor(model => model.File)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Link)
+            @Html.DisplayNameFor(model => model.ContentType)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Price)
@@ -35,10 +35,10 @@
             @Html.DisplayFor(modelItem => item.Title)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Text)
+            <a href="@Url.Action("File", new { @id = item.Id })" target="_blank">Link</a>
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Link)
+            @Html.DisplayFor(modelItem => item.ContentType)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Price)

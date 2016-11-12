@@ -22,8 +22,8 @@
             @Html.DisplayNameFor(model => model.Text)
         </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Text)
+        <dd style="border: 1px solid #DDDDDD;padding:5px 10px">
+            @Html.Raw(Model.Text)
         </dd>
 
         <dt>
@@ -43,7 +43,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Category.Title)
+           Category
         </dt>
 
         <dd>

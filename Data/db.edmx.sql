@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 11/02/2016 00:43:40
+-- Date Created: 11/09/2016 02:20:54
 -- Generated from EDMX file: C:\Users\yusuf\Documents\Visual Studio 2013\Projects\Blog\Data\db.edmx
 -- --------------------------------------------------
 
@@ -94,7 +94,7 @@ CREATE TABLE [dbo].[UserSet] (
     [Name] nvarchar(max)  NOT NULL,
     [Mail] nvarchar(max)  NOT NULL,
     [Password] nvarchar(max)  NOT NULL,
-    [Avatar] nvarchar(max)  NOT NULL
+    [Avatar] varbinary(max)  NULL
 );
 GO
 
@@ -139,7 +139,7 @@ GO
 CREATE TABLE [dbo].[PaymentSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [UserId] int  NOT NULL,
-    [Amount] decimal(18,0)  NOT NULL,
+    [Amount] decimal(18,2)  NOT NULL,
     [Date] datetime  NOT NULL,
     [ProjectAccess_Id] int  NOT NULL
 );
@@ -161,8 +161,9 @@ CREATE TABLE [dbo].[ProjectSet] (
     [UserId] int  NOT NULL,
     [Title] nvarchar(max)  NOT NULL,
     [Text] nvarchar(max)  NOT NULL,
-    [Link] nvarchar(max)  NOT NULL,
-    [Price] decimal(18,0)  NOT NULL
+    [File] varbinary(max)  NULL,
+    [ContentType] nvarchar(max)  NULL,
+    [Price] decimal(18,2)  NOT NULL
 );
 GO
 

@@ -48,10 +48,24 @@ namespace Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,UserId,Title,Text,Link,Price")] Project project)
+        [ValidateInput(false)]
+        public ActionResult Create([Bind(Include = "Id,UserId,Title,Text,Price")] Project project, HttpPostedFileBase File)
         {
             if (ModelState.IsValid)
             {
+                if (File != null && File.ContentLength > 0)
+                {
+                    using (var reader = new System.IO.BinaryReader(File.InputStream))
+                    {
+                        project.File = reader.ReadBytes(File.ContentLength);
+                        project.ContentType = File.ContentType;
+                    }
+                }
+                else
+                {
+                    project.ContentType = "";
+                }
+
                 db.ProjectSet.Add(project);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -82,11 +96,28 @@ namespace Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,UserId,Title,Text,Link,Price")] Project project)
+        [ValidateInput(false)]
+
+        public ActionResult Edit([Bind(Include = "Id,UserId,Title,Text,Price")] Project project, HttpPostedFileBase File)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(project).State = EntityState.Modified;
+
+                if (File != null && File.ContentLength > 0)
+                {
+                    using (var reader = new System.IO.BinaryReader(File.InputStream))
+                    {
+                        project.File = reader.ReadBytes(File.ContentLength);
+                        project.ContentType = File.ContentType;
+                    }
+                }
+                else
+                {
+                    db.Entry(project).Property("File").IsModified = false;
+                    db.Entry(project).Property("ContentType").IsModified = false;
+                }
+
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -127,6 +158,16 @@ namespace Admin.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public ActionResult File(int id)
+        {
+            Project item = db.ProjectSet.Find(id);
+            if (item == null)
+            {
+                return Content("Dosya bulunamadı");
+            }
+            return File(item.File, item.ContentType);
         }
     }
 }
