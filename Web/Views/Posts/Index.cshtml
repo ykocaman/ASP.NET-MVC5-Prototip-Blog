@@ -1,0 +1,25 @@
+﻿@model IQueryable<Data.Post>
+@{
+    ViewBag.Title = "Anasayfa";
+}
+
+@foreach (var post in Model)
+{
+    <div class="row">
+        <h2>@post.Title</h2>
+        <div>
+            @Html.Raw(post.Text)
+        </div>
+        <div class="well posts-detail">
+            @Html.ActionLink("Devamını oku", "Show", "Posts", new { id = post.Id }, null) |
+            @Html.ActionLink(post.Category.Title, "Index", "Posts", new { id = post.Category.Id }, null) |
+            @post.Comment.Count Yorum |
+            <span class="glyphicon glyphicon-time"></span> @post.Date.ToString()
+        </div>
+    </div>
+}
+<hr />
+<div class="row pull-right">
+    @Html.ActionLink("Sonraki sayfa", "Index", 
+    new { start = ViewBag.start, pageSize = ViewBag.pageSize})
+</div>

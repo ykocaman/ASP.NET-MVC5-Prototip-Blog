@@ -1,0 +1,47 @@
+﻿@model Data.Post
+@{
+    ViewBag.Title = "Gönderiler";
+}
+<!-- Blog Post -->
+<!-- Title -->
+<h1>@Model.Title</h1>
+
+<hr>
+
+<!-- Date/Time -->
+<p><span class="glyphicon glyphicon-time"></span> @Model.Date.ToString()</p>
+
+<hr>
+
+@Html.Raw(Model.Text)
+
+<hr>
+
+<div class="well">
+    <h4>Yorum Yaz:</h4>
+    <form role="form">
+        <div class="form-group">
+            <textarea class="form-control" rows="3"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Gönder</button>
+    </form>
+</div>
+
+<hr>
+
+@foreach (Data.Comment comment in Model.Comment)
+{
+    <div class="media">
+        <a class="pull-left" href="#">
+            <img class="media-object" src="@Url.Action("Avatar", new { @id = comment.UserId })" alt="">
+        </a>
+        <div class="media-body">
+            <h4 class="media-heading">
+                @comment.User.Name
+                <small>@comment.Date</small>
+            </h4>
+            @comment.Text
+        </div>
+    </div>
+}
+
