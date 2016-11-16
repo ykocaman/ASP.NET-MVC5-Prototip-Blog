@@ -1,0 +1,27 @@
+﻿@model IQueryable<Data.Project>
+@{
+    ViewBag.Title = "Index";
+}
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>No</th>
+            <th>Adı</th>
+            <th>Detayı</th>
+            <th>Dosyası</th>
+            <th>Fiyatı</th>
+        </tr>
+    </thead>
+@foreach (var project in Model)
+{
+        <tr>
+            <td>@project.Id</td>
+            <td>@project.Title</td>
+            <td>@Html.Raw(project.Text)</td>
+            <td>@Html.ActionLink("İndir", "Download", new { id = project.Id })</td>
+            <td>@project.Price</td>
+        </tr>
+}
+
+</table>

@@ -20,16 +20,16 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Blog", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Blog", "Index", "Posts", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        @Html.ActionLink("Anasayfa", "Index", "Home")
+                        @Html.ActionLink("Anasayfa", "Index", "Posts")
                     </li>
                     <li>
-                        <a href="#">Projeler</a>
+                        @Html.ActionLink("Projeler", "Index", "Projects")
                     </li>
                     <li>
                         <a href="#">İletişim</a>
@@ -81,7 +81,7 @@
                             @foreach (var item in HttpContext.Current.Application["categories"] as List<Data.Category>)
                             {
                                 <li>
-                                    <a href="@Url.Action("Index", new { id= item.Slug })">@item.Title</a>
+                                    <a href="@Url.Action("Index", new { id= item.Id })">@item.Title</a>
                                 </li>
                             }
                         </ul>
