@@ -1,0 +1,42 @@
+﻿<!-- Blog Search Well -->
+<div class="well">
+    <h4>Arama</h4>
+    @using (Html.BeginForm("Index", "Posts", FormMethod.Get))
+    {
+        <div class="input-group">
+            <input type="text" name="query" value="@Request.QueryString["query"]" class="form-control">
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="submit">
+                    <span class="glyphicon glyphicon-search"></span>
+                </button>
+            </span>
+        </div>
+    }
+    <!-- /.input-group -->
+</div>
+
+@if (Session["user"] == null)
+{
+    @Html.Partial("Login", new Web.ViewModel.UserViewModel())
+}
+else
+{
+    var user = (Data.User)Session["user"];
+    @Html.Partial("Profile", user)
+}
+
+<!-- Blog Categories Well -->
+<div class="well">
+    <h4>Kategoriler</h4>
+    <div>
+        <ul class="list-unstyled">
+            @foreach (var item in HttpContext.Current.Application["categories"] as List<Data.Category>)
+            {
+                <li>
+                    <a href="@Url.Action("Index", new { id= item.Id })">@item.Title</a>
+                </li>
+            }
+        </ul>
+    </div>
+    <!-- /.row -->
+</div>

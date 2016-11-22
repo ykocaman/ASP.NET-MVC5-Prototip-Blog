@@ -5,43 +5,100 @@
 <!-- Blog Post -->
 <!-- Title -->
 <h1>@Model.Title</h1>
-
 <hr>
-
 <!-- Date/Time -->
 <p><span class="glyphicon glyphicon-time"></span> @Model.Date.ToString()</p>
-
 <hr>
-
 @Html.Raw(Model.Text)
-
 <hr>
 
-<div class="well">
-    <h4>Yorum Yaz:</h4>
-    <form role="form">
-        <div class="form-group">
-            <textarea class="form-control" rows="3"></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary">Gönder</button>
-    </form>
-</div>
-
-<hr>
-
-@foreach (Data.Comment comment in Model.Comment)
+@if (TempData["comment_error"] != null)
 {
-    <div class="media">
-        <a class="pull-left" href="#">
-            <img class="media-object" src="@Url.Action("Avatar", new { @id = comment.UserId })" alt="">
-        </a>
-        <div class="media-body">
-            <h4 class="media-heading">
-                @comment.User.Name
-                <small>@comment.Date</small>
-            </h4>
-            @comment.Text
-        </div>
-    </div>
+    <div class="alert alert-danger">@TempData["comment_error"]</div>
+}
+else if (TempData["comment_success"] != null)
+{
+    <div class="alert alert-success">@TempData["comment_success"]</div>
 }
 
+@if (Session["user"] == null)
+{
+    <div class="alert alert-warning">Yorum yapabilmek için üye girişi yapınız...</div>
+    @Html.Partial("Login", new Web.ViewModel.UserViewModel())
+}
+else
+{
+    <div class="well" id="form_standart">
+        <span class="pull-right text-danger">Eski Usul</span>
+        <h4>Yorum Yaz:</h4>
+        @using (Html.BeginForm("Comment", "Posts", FormMethod.Post))
+        {
+            @Html.Hidden("post_id", Model.Id)
+
+            <div class="form-group">
+                @Html.TextArea("comment_text", "", 3, 0, new { @class = "form-control" })
+            </div>
+            <button type="submit" class="btn btn-primary">Gönder</button>
+            <button type="button" class="btn btn-danger pull-right" id="switch_ajax">Ajax ile Gönder</button>
+        }
+    </div>
+
+    <div class="well hide" id="form_ajax">
+        <span class="pull-right text-success">Ajax qeyfiii</span>
+        <h4>Yorum Yaz:</h4>
+        @using (Ajax.BeginForm("CommentAjax", null, null, new AjaxOptions
+        {
+            HttpMethod = "POST",
+            OnSuccess = "ShowMessage",
+            UpdateTargetId = "result"
+        }))
+        {
+            <div id="result" class="alert alert-info hide"></div>
+
+            @Html.AntiForgeryToken()
+
+            @Html.Hidden("post_id", Model.Id)
+
+            <div class="form-group">
+                @Html.TextArea("comment_text", "", 3, 0, new { @class = "form-control" })
+            </div>
+            <button type="submit" class="btn btn-primary">Gönder</button>
+            <button type="button" class="btn btn-success pull-right" id="switch_standart">Eski Usul Gönder</button>
+
+        }
+    </div>
+}
+<hr>
+@foreach (Data.Comment comment in Model.Comment.Where(q => q.Verified == true))
+{
+    @Html.Partial("Comment", comment)
+}
+
+@section js {
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script>
+        function ShowMessage() {
+            $("#result").removeClass("hide");
+        }
+
+        $(function () {
+            $("#switch_ajax").click(function () {
+                $("#form_standart").addClass("hide");
+                $("#form_ajax").removeClass("hide");
+            });
+
+            $("#switch_standart").click(function () {
+                $("#form_ajax").addClass("hide");
+                $("#form_standart").removeClass("hide");
+            });
+           
+            /*
+            $("#switch_ajax,#switch_standart").click(function () {
+
+                $("#form_standart").toggleClass("hide");
+                $("#form_ajax").toggleClass("hide");
+            });
+             */
+        });
+    </script>
+}

@@ -1,0 +1,12 @@
+﻿@model Data.User
+<!-- Side Widget Well -->
+<div class="well">
+    <h4>Üye Paneli</h4>
+    <img class="img-thumbnail pull-right" src="@Url.Action("Avatar", "User", new { id = Model.Id })" />
+
+    Merhaba <b>@Model.Name</b>, Hoş geldin !<br /><br />
+    <p>Yorum adedi: @Model.Comment.Count</p>
+
+    @Html.ActionLink("Çıkış Yap", "Logout", "User", null, new { @class = "btn btn-danger" })
+    <div class="clearfix"></div>
+</div>
