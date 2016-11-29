@@ -9,6 +9,7 @@
     @using (Html.BeginForm("Login", "User", FormMethod.Post))
     {
         <div class="form-group">
+            <label for="Email">E-Posta</label>
             @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label" }) :
             @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
         </div>

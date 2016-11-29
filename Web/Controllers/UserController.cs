@@ -16,7 +16,6 @@ namespace Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                dbContainer db = new dbContainer();
                 User found = db.UserSet.FirstOrDefault(r => r.Mail == user.Email && r.Password == user.Password);
                 if (found != null)
                 {

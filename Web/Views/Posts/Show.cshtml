@@ -39,7 +39,7 @@ else
                 @Html.TextArea("comment_text", "", 3, 0, new { @class = "form-control" })
             </div>
             <button type="submit" class="btn btn-primary">Gönder</button>
-            <button type="button" class="btn btn-danger pull-right" id="switch_ajax">Ajax ile Gönder</button>
+            <button type="button" class="btn btn-danger pull-right degistirenler" id="switch_ajax">Ajax ile Gönder</button>
         }
     </div>
 
@@ -63,7 +63,7 @@ else
                 @Html.TextArea("comment_text", "", 3, 0, new { @class = "form-control" })
             </div>
             <button type="submit" class="btn btn-primary">Gönder</button>
-            <button type="button" class="btn btn-success pull-right" id="switch_standart">Eski Usul Gönder</button>
+    <button type="button" class="btn btn-success pull-right degistirenler" id="switch_standart">Eski Usul Gönder</button>
 
         }
     </div>
@@ -77,28 +77,17 @@ else
 @section js {
     <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
     <script>
-        function ShowMessage() {
-            $("#result").removeClass("hide");
-        }
-
-        $(function () {
-            $("#switch_ajax").click(function () {
-                $("#form_standart").addClass("hide");
-                $("#form_ajax").removeClass("hide");
-            });
-
-            $("#switch_standart").click(function () {
-                $("#form_ajax").addClass("hide");
-                $("#form_standart").removeClass("hide");
-            });
-           
-            /*
-            $("#switch_ajax,#switch_standart").click(function () {
-
+        $(function() {
+            $(".degistirenler").click(function () {
                 $("#form_standart").toggleClass("hide");
                 $("#form_ajax").toggleClass("hide");
             });
-             */
         });
+
+         function ShowMessage() {
+            $("#result").removeClass("hide");
+        }
+
+     
     </script>
 }
