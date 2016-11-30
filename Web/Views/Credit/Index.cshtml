@@ -1,0 +1,81 @@
+﻿@{
+    ViewBag.Title = "Kredi Kartı ile Ödeme";
+}
+
+<form class="form-horizontal span6">
+    <fieldset>
+        <legend>@ViewBag.Title</legend>
+
+        <div class="control-group">
+            <label class="control-label">Kart Sahibi</label>
+            <div class="controls">
+                <div class="row-fluid">
+                    <input type="text" class="form-control" required>
+                </div>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label">Kart Numarası</label>
+            <div class="controls">
+                <div class="row-fluid">
+                    <div class="col-md-3">
+                        <input type="text" class="form-control" autocomplete="off" maxlength="4" required>
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" class="form-control" autocomplete="off" maxlength="4" required>
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" class="form-control" autocomplete="off" maxlength="4" required>
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" class="form-control" autocomplete="off" maxlength="4" required>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="control-group">
+                    <label class="control-label">Son Kullanım Tarihi</label>
+                    <div class="controls">
+                        <div class="row-fluid">
+                            <div class="col-md-6">
+                                <select class="form-control">
+                                    <option>Ocak</option>
+                                    <option>...</option>
+                                    <option>Aralık</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <select class="form-control">
+                                    <option>2013</option>
+                                    <option>...</option>
+                                    <option>2016</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="control-group">
+                    <label class="control-label">Güvenlik CVV</label>
+                    <div class="controls">
+                        <div class="row-fluid">
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" autocomplete="off" maxlength="3" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Ödeme yap</button>
+            <button type="button" class="btn">Vazgeç</button>
+        </div>
+    </fieldset>
+</form>

@@ -19,7 +19,7 @@
             <td>@project.Id</td>
             <td>@project.Title</td>
             <td>@Html.Raw(project.Text)</td>
-            <td>@Html.ActionLink("İndir", "Download", new { id = project.Id })</td>
+            <td>@Html.ActionLink("Satın Al", "Index", "Credit", null, new { id = project.Id })</td>
             <td>@project.Price</td>
         </tr>
 }

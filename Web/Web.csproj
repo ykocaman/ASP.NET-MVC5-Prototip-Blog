@@ -107,6 +107,8 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\ContactController.cs" />
+    <Compile Include="Controllers\CreditController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PostsController.cs" />
     <Compile Include="Controllers\ProjectsController.cs" />
@@ -116,6 +118,7 @@
     </Compile>
     <Compile Include="Helpers\ImageHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\MailViewModel.cs" />
     <Compile Include="ViewModel\UserViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -135,6 +138,10 @@
     <Content Include="Views\Shared\Login.cshtml" />
     <Content Include="Views\Shared\Profile.cshtml" />
     <Content Include="Views\Posts\Comment.cshtml" />
+    <Content Include="Views\Contact\Index.cshtml" />
+    <Content Include="Views\Contact\Success.cshtml" />
+    <Content Include="Views\Contact\Fail.cshtml" />
+    <Content Include="Views\Credit\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
