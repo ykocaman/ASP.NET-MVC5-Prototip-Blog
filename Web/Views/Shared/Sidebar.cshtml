@@ -33,7 +33,7 @@ else
             @foreach (var item in HttpContext.Current.Application["categories"] as List<Data.Category>)
             {
                 <li>
-                    <a href="@Url.Action("Index", "Home", new { id= item.Id })">@item.Title</a>
+                    <a href="@Url.Action("Index", "Posts", new { id= item.Id })">@item.Title</a>
                 </li>
             }
         </ul>

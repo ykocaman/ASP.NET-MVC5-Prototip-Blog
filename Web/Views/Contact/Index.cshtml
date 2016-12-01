@@ -24,6 +24,27 @@
         </div>
     </div>
     <div class="form-group">
+        @Html.LabelFor(m => m.Phone, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Phone, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Phone)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Category, new { @class = "col-md-2 control-label", })
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.Category, (IEnumerable<SelectListItem>)ViewData["categories"], new { @class = "form-control", @id = "categories" })
+            @Html.ValidationMessageFor(m => m.Category)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Post, new { @class = "col-md-2 control-label", })
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.Post, (IEnumerable<SelectListItem>)ViewData["posts"], new { @class = "form-control", @id = "posts" })
+            @Html.ValidationMessageFor(m => m.Post)
+        </div>
+    </div>
+    <div class="form-group">
         @Html.LabelFor(m => m.Subject, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
             @Html.TextBoxFor(m => m.Subject, new { @class = "form-control" })
@@ -42,4 +63,26 @@
             <input type="submit" class="btn btn-default" value="Gönder" />
         </div>
     </div>
+}
+
+@section js{
+    <script>
+        $(function () {
+            $("#categories").change(function () {
+                var categoryId = $("#categories").val();
+                $.ajax({
+                    url: "@Url.Action("Json","Posts")/" + categoryId,
+                    type:'GET',
+                    dataType: 'json',
+                    success: function (json) {
+                        $('#posts').empty();
+                        $.each(json, function (i, item) {
+                            $('#posts').append($('<option>').text(item['Title']).attr('value', item['Id']));
+                        });
+                    }
+                });
+            })
+        });
+    </script>
+
 }

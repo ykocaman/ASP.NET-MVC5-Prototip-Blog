@@ -25,7 +25,7 @@ namespace Web.Controllers
                 return Content("Dosya bulunamadı");
             }
 
-            Response.AddHeader("Content-Disposition", "attachment; filename=" + project.Title);
+            Response.AddHeader("Content-Disposition", "attachment; filename=" + project.Filename);
 
             return File(project.File, project.ContentType);
         }

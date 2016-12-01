@@ -31,7 +31,15 @@
         </dt>
 
         <dd>
-            <a href="@Url.Action("File", new { @id = Model.Id })" target="_blank">Link</a>
+            @Html.DisplayFor(model => model.File)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Filename)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Filename)
         </dd>
 
         <dt>
@@ -51,7 +59,7 @@
         </dd>
 
         <dt>
-           Owner
+            @Html.DisplayNameFor(model => model.User.Name)
         </dt>
 
         <dd>

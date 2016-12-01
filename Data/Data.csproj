@@ -71,6 +71,7 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>db.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <Content Include="data.sql" />
     <Content Include="db.edmx.diagram">
       <DependentUpon>db.edmx</DependentUpon>
     </Content>

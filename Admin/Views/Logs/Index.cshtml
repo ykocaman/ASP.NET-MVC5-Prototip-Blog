@@ -12,9 +12,6 @@
             @Html.DisplayNameFor(model => model.Subject)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Detail)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.Date)
         </th>
         <th>
@@ -29,16 +26,13 @@
             @Html.DisplayFor(modelItem => item.Subject)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Detail)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.Date)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.User.Name)
         </td>
         <td>
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id })
         </td>
     </tr>
 }

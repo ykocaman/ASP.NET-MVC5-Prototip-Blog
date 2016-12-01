@@ -15,7 +15,13 @@
             @Html.DisplayNameFor(model => model.Title)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.Text)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.File)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Filename)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.ContentType)
@@ -29,29 +35,36 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            <a href="@Url.Action("File", new { @id = item.Id })" target="_blank">Link</a>
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ContentType)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.User.Name)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Text)
+            </td>
+            <td>
+                <a href="@Url.Action("File", new { @id = item.Id })" target="_blank">Link</a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Filename)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContentType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.Name)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
 
 </table>

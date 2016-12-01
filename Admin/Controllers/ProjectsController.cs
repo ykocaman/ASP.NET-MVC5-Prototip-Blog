@@ -58,12 +58,14 @@ namespace Admin.Controllers
                     using (var reader = new System.IO.BinaryReader(File.InputStream))
                     {
                         project.File = reader.ReadBytes(File.ContentLength);
+                        project.Filename = File.FileName;
                         project.ContentType = File.ContentType;
                     }
                 }
                 else
                 {
                     project.ContentType = "";
+                    project.Filename = "";
                 }
 
                 db.ProjectSet.Add(project);
@@ -97,7 +99,6 @@ namespace Admin.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-
         public ActionResult Edit([Bind(Include = "Id,UserId,Title,Text,Price")] Project project, HttpPostedFileBase File)
         {
             if (ModelState.IsValid)
@@ -109,12 +110,14 @@ namespace Admin.Controllers
                     using (var reader = new System.IO.BinaryReader(File.InputStream))
                     {
                         project.File = reader.ReadBytes(File.ContentLength);
+                        project.Filename = File.FileName;
                         project.ContentType = File.ContentType;
                     }
                 }
                 else
                 {
                     db.Entry(project).Property("File").IsModified = false;
+                    db.Entry(project).Property("Filename").IsModified = false;
                     db.Entry(project).Property("ContentType").IsModified = false;
                 }
 
@@ -167,6 +170,9 @@ namespace Admin.Controllers
             {
                 return Content("Dosya bulunamadı");
             }
+
+            Response.AddHeader("Content-Disposition", "attachment; filename=" + item.Filename);
+
             return File(item.File, item.ContentType);
         }
     }

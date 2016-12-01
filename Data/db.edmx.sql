@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 11/09/2016 02:20:54
+-- Date Created: 12/01/2016 22:10:43
 -- Generated from EDMX file: C:\Users\yusuf\Documents\Visual Studio 2013\Projects\Blog\Data\db.edmx
 -- --------------------------------------------------
 
@@ -162,6 +162,7 @@ CREATE TABLE [dbo].[ProjectSet] (
     [Title] nvarchar(max)  NOT NULL,
     [Text] nvarchar(max)  NOT NULL,
     [File] varbinary(max)  NULL,
+    [Filename] nvarchar(max)  NOT NULL,
     [ContentType] nvarchar(max)  NULL,
     [Price] decimal(18,2)  NOT NULL
 );

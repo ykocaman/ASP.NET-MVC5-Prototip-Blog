@@ -137,6 +137,7 @@
     <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Text" Type="nvarchar(max)" Nullable="false" />
     <Property Name="File" Type="varbinary(max)" Nullable="true" />
+    <Property Name="Filename" Type="nvarchar(max)" Nullable="false" />
     <Property Name="ContentType" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Price" Type="decimal" Nullable="false" Precision="18" Scale="2" />
   </EntityType>
@@ -434,6 +435,7 @@
           <Property Name="Title" Type="String" Nullable="false" />
           <Property Name="Text" Type="String" Nullable="false" />
           <Property Name="File" Type="Binary" Nullable="true" />
+          <Property Name="Filename" Type="String" Nullable="false" />
           <Property Name="ContentType" Type="String" Nullable="true" />
           <Property Name="Price" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
         </EntityType>
@@ -660,6 +662,7 @@
           <ScalarProperty Name="Title" ColumnName="Title" />
           <ScalarProperty Name="Text" ColumnName="Text" />
           <ScalarProperty Name="File" ColumnName="File" />
+          <ScalarProperty Name="Filename" ColumnName="Filename" />
           <ScalarProperty Name="ContentType" ColumnName="ContentType" />
           <ScalarProperty Name="Price" ColumnName="Price" />
         </MappingFragment>
