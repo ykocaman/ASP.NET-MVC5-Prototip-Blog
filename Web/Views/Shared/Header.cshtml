@@ -20,6 +20,15 @@
                 <li>
                     @Html.ActionLink("Projeler", "Index", "Projects")
                 </li>
+                @if (Web.Helpers.UserHelper.isMember() == true)
+                {
+                    <li>
+                        @Html.ActionLink("Ödemelerim", "List", "Credit")
+                    </li>
+                    <li>
+                        @Html.ActionLink("Sepetim", "Index", "Cart")
+                    </li>
+                }
                 <li>
                     @Html.ActionLink("İletişim", "Index", "Contact")
                 </li>

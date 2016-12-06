@@ -15,6 +15,7 @@
     <EntitySet Name="LogSet" EntityType="db.Store.LogSet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="ProjectSet" EntityType="db.Store.ProjectSet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="ProjectAccessSet" EntityType="db.Store.ProjectAccessSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CartSet" EntityType="db.Store.CartSet" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="UserPost" Association="db.Store.UserPost">
       <End Role="User" EntitySet="UserSet" />
       <End Role="Post" EntitySet="PostSet" />
@@ -58,6 +59,14 @@
     <AssociationSet Name="ProjectAccessPayment" Association="db.Store.ProjectAccessPayment">
       <End Role="ProjectAccess" EntitySet="ProjectAccessSet" />
       <End Role="Payment" EntitySet="PaymentSet" />
+    </AssociationSet>
+    <AssociationSet Name="UserCart" Association="db.Store.UserCart">
+      <End Role="User" EntitySet="UserSet" />
+      <End Role="Cart" EntitySet="CartSet" />
+    </AssociationSet>
+    <AssociationSet Name="CartProject" Association="db.Store.CartProject">
+      <End Role="Cart" EntitySet="CartSet" />
+      <End Role="Project" EntitySet="ProjectSet" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="UserSet">
@@ -148,6 +157,16 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="ProjectId" Type="int" Nullable="false" />
     <Property Name="UserId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CartSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="Status" Type="int" Nullable="false" />
+    <Property Name="Count" Type="int" Nullable="false" />
+    <Property Name="ProjectId" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="UserPost">
     <End Role="User" Type="db.Store.UserSet" Multiplicity="1" />
@@ -281,6 +300,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="UserCart">
+    <End Role="User" Type="db.Store.UserSet" Multiplicity="1" />
+    <End Role="Cart" Type="db.Store.CartSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Cart">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CartProject">
+    <End Role="Cart" Type="db.Store.CartSet" Multiplicity="*" />
+    <End Role="Project" Type="db.Store.ProjectSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Project">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Cart">
+        <PropertyRef Name="ProjectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -339,6 +382,15 @@
             <End Role="ProjectAccess" EntitySet="ProjectAccessSet" />
             <End Role="Payment" EntitySet="PaymentSet" />
           </AssociationSet>
+          <EntitySet Name="CartSet" EntityType="db.Cart" />
+          <AssociationSet Name="UserCart" Association="db.UserCart">
+            <End Role="User" EntitySet="UserSet" />
+            <End Role="Cart" EntitySet="CartSet" />
+          </AssociationSet>
+          <AssociationSet Name="CartProject" Association="db.CartProject">
+            <End Role="Cart" EntitySet="CartSet" />
+            <End Role="Project" EntitySet="ProjectSet" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="User">
           <Key>
@@ -357,6 +409,7 @@
           <Property Name="Mail" Type="String" Nullable="false" />
           <Property Name="Password" Type="String" Nullable="false" />
           <Property Name="Avatar" Type="Binary" Nullable="true" />
+          <NavigationProperty Name="Cart" Relationship="db.UserCart" FromRole="User" ToRole="Cart" />
         </EntityType>
         <EntityType Name="Post">
           <Key>
@@ -438,6 +491,7 @@
           <Property Name="Filename" Type="String" Nullable="false" />
           <Property Name="ContentType" Type="String" Nullable="true" />
           <Property Name="Price" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <NavigationProperty Name="Cart" Relationship="db.CartProject" FromRole="Project" ToRole="Cart" />
         </EntityType>
         <Association Name="UserPost">
           <End Type="db.User" Role="User" Multiplicity="1" />
@@ -574,6 +628,47 @@
           <End Type="db.ProjectAccess" Role="ProjectAccess" Multiplicity="1" />
           <End Type="db.Payment" Role="Payment" Multiplicity="0..1" />
         </Association>
+        <EntityType Name="Cart">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="User" Relationship="db.UserCart" FromRole="Cart" ToRole="User" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="db.CartStatus" Nullable="false" />
+          <Property Name="Count" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Project" Relationship="db.CartProject" FromRole="Cart" ToRole="Project" />
+          <Property Name="ProjectId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="UserCart">
+          <End Type="db.User" Role="User" Multiplicity="1" />
+          <End Type="db.Cart" Role="Cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cart">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EnumType Name="CartStatus">
+          <Member Name="New" />
+          <Member Name="Paid" />
+          <Member Name="Canceled" />
+        </EnumType>
+        <Association Name="CartProject">
+          <End Type="db.Cart" Role="Cart" Multiplicity="*" />
+          <End Type="db.Project" Role="Project" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cart">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -674,6 +769,17 @@
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CartSet">
+      <EntityTypeMapping TypeName="IsTypeOf(db.Cart)">
+        <MappingFragment StoreEntitySet="CartSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Count" ColumnName="Count" />
+          <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

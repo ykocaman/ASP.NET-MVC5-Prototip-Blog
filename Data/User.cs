@@ -22,6 +22,7 @@ namespace Data
             this.Payment = new HashSet<Payment>();
             this.Project = new HashSet<Project>();
             this.ProjectAccess = new HashSet<ProjectAccess>();
+            this.Cart = new HashSet<Cart>();
         }
     
         public int Id { get; set; }
@@ -38,5 +39,6 @@ namespace Data
         public virtual ICollection<Project> Project { get; set; }
         public virtual UserType UserType { get; set; }
         public virtual ICollection<ProjectAccess> ProjectAccess { get; set; }
+        public virtual ICollection<Cart> Cart { get; set; }
     }
 }

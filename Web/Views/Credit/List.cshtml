@@ -1,0 +1,35 @@
+﻿@model IEnumerable<Data.Payment>
+@{
+    ViewBag.Title = "Ödemeler";
+}
+@if (Model.Count() > 0)
+{
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Tutar</th>
+                <th>Tarih</th>
+                <th>Proje Adı</th>
+            </tr>
+        </thead>
+        @foreach (var payment in Model)
+        {
+            <tr>
+                <td>@payment.Id</td>
+                <td>@payment.Amount TL</td>
+                <td>@payment.Date</td>
+                @{
+            var project = payment.ProjectAccess.Project;
+                }
+                <td>@Html.ActionLink(project.Title, "Download", "Projects", new { id = project.Id }, null)</td>
+            </tr>
+        }
+
+    </table>
+}
+else
+{
+    <div class="alert alert-danger">Hiç bir ödemeniz bulunamadı.</div>
+}
+

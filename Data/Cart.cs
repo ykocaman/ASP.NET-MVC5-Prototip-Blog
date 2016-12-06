@@ -12,25 +12,15 @@ namespace Data
     using System;
     using System.Collections.Generic;
     
-    public partial class Project
+    public partial class Cart
     {
-        public Project()
-        {
-            this.ProjectAccess = new HashSet<ProjectAccess>();
-            this.Cart = new HashSet<Cart>();
-        }
-    
         public int Id { get; set; }
         public int UserId { get; set; }
-        public string Title { get; set; }
-        public string Text { get; set; }
-        public byte[] File { get; set; }
-        public string Filename { get; set; }
-        public string ContentType { get; set; }
-        public decimal Price { get; set; }
+        public CartStatus Status { get; set; }
+        public int Count { get; set; }
+        public int ProjectId { get; set; }
     
         public virtual User User { get; set; }
-        public virtual ICollection<ProjectAccess> ProjectAccess { get; set; }
-        public virtual ICollection<Cart> Cart { get; set; }
+        public virtual Project Project { get; set; }
     }
 }

@@ -1,0 +1,28 @@
+﻿@model Web.ViewModel.CreditViewModel
+@{
+    ViewBag.Title = "Sepet Ödeme";
+}
+
+@using (Html.BeginForm("Pay", "Cart", null, FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    <fieldset>
+        <legend><h2>@ViewBag.Title</h2></legend>
+
+        <div class="row">
+            <h3 class="col-md-4"> Toplam Sepet Tutarı:</h3>
+
+            <div class="controls">
+                <h3 class="col-md-8">
+                    @ViewBag.Amount TL
+                </h3>
+            </div>
+        </div>
+
+        @Html.Partial("CardForm",Model)
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Ödeme yap</button>
+            @Html.ActionLink("Vazgeç", "Index", "Cart", null, new { @class = "btn btn-danger" })
+        </div>
+    </fieldset>
+}

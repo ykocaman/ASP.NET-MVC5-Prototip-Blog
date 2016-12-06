@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 12/01/2016 22:10:43
+-- Date Created: 12/06/2016 21:44:06
 -- Generated from EDMX file: C:\Users\yusuf\Documents\Visual Studio 2013\Projects\Blog\Data\db.edmx
 -- --------------------------------------------------
 
@@ -50,6 +50,12 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_ProjectAccessPayment]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[PaymentSet] DROP CONSTRAINT [FK_ProjectAccessPayment];
 GO
+IF OBJECT_ID(N'[dbo].[FK_UserCart]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CartSet] DROP CONSTRAINT [FK_UserCart];
+GO
+IF OBJECT_ID(N'[dbo].[FK_CartProject]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CartSet] DROP CONSTRAINT [FK_CartProject];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -81,6 +87,9 @@ IF OBJECT_ID(N'[dbo].[ProjectSet]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[ProjectAccessSet]', 'U') IS NOT NULL
     DROP TABLE [dbo].[ProjectAccessSet];
+GO
+IF OBJECT_ID(N'[dbo].[CartSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[CartSet];
 GO
 
 -- --------------------------------------------------
@@ -176,6 +185,16 @@ CREATE TABLE [dbo].[ProjectAccessSet] (
 );
 GO
 
+-- Creating table 'CartSet'
+CREATE TABLE [dbo].[CartSet] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [UserId] int  NOT NULL,
+    [Status] int  NOT NULL,
+    [Count] int  NOT NULL,
+    [ProjectId] int  NOT NULL
+);
+GO
+
 -- --------------------------------------------------
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
@@ -231,6 +250,12 @@ GO
 -- Creating primary key on [Id] in table 'ProjectAccessSet'
 ALTER TABLE [dbo].[ProjectAccessSet]
 ADD CONSTRAINT [PK_ProjectAccessSet]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'CartSet'
+ALTER TABLE [dbo].[CartSet]
+ADD CONSTRAINT [PK_CartSet]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
@@ -401,6 +426,36 @@ GO
 CREATE INDEX [IX_FK_ProjectAccessPayment]
 ON [dbo].[PaymentSet]
     ([ProjectAccess_Id]);
+GO
+
+-- Creating foreign key on [UserId] in table 'CartSet'
+ALTER TABLE [dbo].[CartSet]
+ADD CONSTRAINT [FK_UserCart]
+    FOREIGN KEY ([UserId])
+    REFERENCES [dbo].[UserSet]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_UserCart'
+CREATE INDEX [IX_FK_UserCart]
+ON [dbo].[CartSet]
+    ([UserId]);
+GO
+
+-- Creating foreign key on [ProjectId] in table 'CartSet'
+ALTER TABLE [dbo].[CartSet]
+ADD CONSTRAINT [FK_CartProject]
+    FOREIGN KEY ([ProjectId])
+    REFERENCES [dbo].[ProjectSet]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_CartProject'
+CREATE INDEX [IX_FK_CartProject]
+ON [dbo].[CartSet]
+    ([ProjectId]);
 GO
 
 -- --------------------------------------------------

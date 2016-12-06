@@ -1,0 +1,51 @@
+﻿@model IQueryable<Data.Cart>
+@{
+    ViewBag.Title = "Sepetim";
+}
+
+@if (Model.Count() > 0)
+{
+    <div class="row alert alert-info">
+        <h3 class="col-sm-9" style="margin: 10px 0;">Toplam: @Model.Sum(q => q.Project.Price) TL </h3>
+        <div class="col-sm-3">
+            @Html.ActionLink("Ödeme Yap", "PayForm", "Cart", null, new { @class = "btn btn-success btn-lg" })
+        </div>
+    </div>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Proje</th>
+                <th>Fiyat</th>
+                <th>Adet</th>
+                <th>İşlem</th>
+            </tr>
+        </thead>
+        @foreach (var cart in Model)
+        {
+            <tr id="trCart@(cart.Id)">
+                <td>@cart.Project.Title</td>
+                <td>@cart.Project.Price TL</td>
+                <td>@cart.Count</td>
+                <td>
+                    @Ajax.ActionLink("Çıkar", "RemoveFromCart", "Projects", new { @id = cart.ProjectId },
+                  new AjaxOptions { HttpMethod = "POST", OnSuccess = "HideCart(" + cart.Id + ")" })
+                </td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <div class="alert alert-danger">Sepetiniz BOŞ! Hemen hızlıca doldurun!</div>
+    <center>@Html.ActionLink("Projelere gözat", "Index", "Projects", null, new { @class = "btn btn-success btn-lg" })</center>
+}
+@section js{
+    <script src="/Scripts/jquery.unobtrusive-ajax.js"></script>
+
+    <script>
+        function HideCart(id) {
+            $("#trCart" + id).addClass("hide");
+        }
+    </script>
+}

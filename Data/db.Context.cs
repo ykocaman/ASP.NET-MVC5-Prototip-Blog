@@ -34,5 +34,6 @@ namespace Data
         public virtual DbSet<Log> LogSet { get; set; }
         public virtual DbSet<Project> ProjectSet { get; set; }
         public virtual DbSet<ProjectAccess> ProjectAccessSet { get; set; }
+        public virtual DbSet<Cart> CartSet { get; set; }
     }
 }

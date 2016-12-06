@@ -1,0 +1,69 @@
+﻿@model Web.ViewModel.CreditViewModel
+
+<div class="control-group">
+    @Html.LabelFor(m => m.Holder, new { @class = "control-label" })
+    <div class="controls">
+        <div class="row-fluid">
+            @Html.TextBoxFor(m => m.Holder, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Holder)
+        </div>
+    </div>
+</div>
+
+<div class="control-group">
+    @Html.LabelFor(m => m.Number1, new { @class = "control-label" })
+    <div class="controls">
+        <div class="row-fluid">
+            <div class="col-md-3">
+                @Html.TextBoxFor(m => m.Number1, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Number1)
+            </div>
+            <div class="col-md-3">
+                @Html.TextBoxFor(m => m.Number2, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Number2)
+            </div>
+            <div class="col-md-3">
+                @Html.TextBoxFor(m => m.Number3, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Number3)
+            </div>
+            <div class="col-md-3">
+                @Html.TextBoxFor(m => m.Number4, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Number4)
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="control-group">
+            @Html.LabelFor(m => m.Month, new { @class = "control-label" })
+            <div class="controls">
+                <div class="row-fluid">
+                    <div class="col-md-6">
+                        @Html.TextBoxFor(m => m.Month, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Month)
+                    </div>
+                    <div class="col-md-6">
+                        @Html.TextBoxFor(m => m.Year, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Year)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="control-group">
+            @Html.LabelFor(m => m.CVC, new { @class = "control-label" })
+            <div class="controls">
+                <div class="row-fluid">
+                    <div class="col-md-6">
+                        @Html.TextBoxFor(m => m.CVC, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.CVC)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr />

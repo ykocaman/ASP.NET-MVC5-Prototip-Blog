@@ -6,12 +6,12 @@
     <edmx:Diagrams>
       <Diagram DiagramId="d2071bb6ed2940fc82004569306093f5" Name="Diagram1" DisplayType="true" >
         <EntityTypeShape EntityType="db.User" Width="1.5" PointX="3" PointY="2.5" />
-        <EntityTypeShape EntityType="db.Post" Width="1.5" PointX="5.25" PointY="0.5" />
-        <EntityTypeShape EntityType="db.Category" Width="1.5" PointX="7.75" PointY="0.5" />
-        <EntityTypeShape EntityType="db.Comment" Width="1.5" PointX="9" PointY="2.625" />
+        <EntityTypeShape EntityType="db.Post" Width="1.5" PointX="5.875" PointY="0.5" />
+        <EntityTypeShape EntityType="db.Category" Width="1.5" PointX="8.625" PointY="0.5" />
+        <EntityTypeShape EntityType="db.Comment" Width="1.5" PointX="10.625" PointY="3.5" />
         <EntityTypeShape EntityType="db.UserType" Width="1.5" PointX="3" PointY="0.5" />
         <EntityTypeShape EntityType="db.Payment" Width="1.5" PointX="10.875" PointY="0.875" />
-        <EntityTypeShape EntityType="db.Log" Width="1.5" PointX="7.125" PointY="3.75" />
+        <EntityTypeShape EntityType="db.Log" Width="1.5" PointX="6" PointY="3.875" />
         <EntityTypeShape EntityType="db.Project" Width="1.5" PointX="0.5" PointY="0.5" />
         <AssociationConnector Association="db.UserPost" />
         <AssociationConnector Association="db.PostCategory" />
@@ -25,6 +25,9 @@
         <AssociationConnector Association="db.ProjectProjectAccess" />
         <AssociationConnector Association="db.UserProjectAccess" />
         <AssociationConnector Association="db.ProjectAccessPayment" />
+        <EntityTypeShape EntityType="db.Cart" Width="1.5" PointX="8.5" PointY="4" />
+        <AssociationConnector Association="db.UserCart" />
+        <AssociationConnector Association="db.CartProject" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
