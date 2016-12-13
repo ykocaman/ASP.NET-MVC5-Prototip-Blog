@@ -53,11 +53,13 @@ namespace Web.Controllers
 
         public ActionResult Avatar(int id)
         {
-            byte[] file = db.UserSet.Find(id).Avatar;
-            if (file == null)
+            User user = db.UserSet.Find(id);
+            if (user == null)
             {
                 return Content("Resim bulunamadı");
             }
+            byte[] file = user.Avatar;
+
             return File(file, ImageHelper.GetContentType(file).ToString());
         }
 

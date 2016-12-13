@@ -15,7 +15,7 @@ namespace Web.Controllers
         {
             var httpContext = System.Web.HttpContext.Current;
 
-            if (httpContext.Application["categories"] == null)
+            if (httpContext != null && httpContext.Application["categories"] == null)
 	        {
                 httpContext.Application["categories"] = db.CategorySet.ToList();
 	        }

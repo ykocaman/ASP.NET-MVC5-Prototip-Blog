@@ -12,7 +12,6 @@ namespace Admin.Controllers
 {
     public class UserTypesController : BaseController
     {
-        private dbContainer db = new dbContainer();
 
         // GET: UserTypes
         public ActionResult Index()

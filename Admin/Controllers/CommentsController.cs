@@ -12,7 +12,6 @@ namespace Admin.Controllers
 {
     public class CommentsController : BaseController
     {
-        private dbContainer db = new dbContainer();
 
         // GET: Comments
         public ActionResult Index()

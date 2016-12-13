@@ -12,7 +12,6 @@ namespace Admin.Controllers
 {
     public class ProjectAccessesController : BaseController
     {
-        private dbContainer db = new dbContainer();
 
         // GET: ProjectAccesses
         public ActionResult Index()

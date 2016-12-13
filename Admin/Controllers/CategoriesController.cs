@@ -12,7 +12,6 @@ namespace Admin.Controllers
 {
     public class CategoriesController : BaseController
     {
-        private dbContainer db = new dbContainer();
 
         // GET: Categories
         public ActionResult Index()

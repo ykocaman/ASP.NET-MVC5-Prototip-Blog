@@ -24,7 +24,7 @@ namespace Admin.Controllers
                 log.Subject = context.Request.Path;
                 log.Detail = context.Request.Params.ToString();
                 db.LogSet.Add(log);
-                db.SaveChangesAsync();
+                db.SaveChanges();
             }
         }
     }

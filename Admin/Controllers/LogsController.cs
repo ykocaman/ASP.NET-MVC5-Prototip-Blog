@@ -12,7 +12,6 @@ namespace Admin.Controllers
 {
     public class LogsController : BaseController
     {
-        private dbContainer db = new dbContainer();
 
         // GET: Logs
         public ActionResult Index()

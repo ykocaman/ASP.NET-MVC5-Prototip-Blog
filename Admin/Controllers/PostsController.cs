@@ -12,7 +12,6 @@ namespace Admin.Controllers
 {
     public class PostsController : BaseController
     {
-        private dbContainer db = new dbContainer();
 
         // GET: Posts
         public ActionResult Index()

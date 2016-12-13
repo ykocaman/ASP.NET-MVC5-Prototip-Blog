@@ -14,7 +14,6 @@ namespace Admin.Controllers
 {
     public class UsersController : BaseController
     {
-        private dbContainer db = new dbContainer();
 
         // GET: Users
         public ActionResult Index()
