@@ -9,6 +9,11 @@ namespace Web.Helpers
     public static class UserHelper
     {
         public static User Current(){
+            if (HttpContext.Current == null)
+            {
+                return null;
+            }
+
             return (User)HttpContext.Current.Session["user"];
         }
 

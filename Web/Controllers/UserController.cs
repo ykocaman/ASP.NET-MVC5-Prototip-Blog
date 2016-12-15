@@ -40,6 +40,11 @@ namespace Web.Controllers
                 TempData["error"] = "Eksik form alanı bıraktınız...";
             }
 
+            if (Request == null)
+            {
+                return View("LoginForm"); 
+            }
+
             return Redirect(Request.UrlReferrer.ToString());
         }
 
@@ -54,10 +59,12 @@ namespace Web.Controllers
         public ActionResult Avatar(int id)
         {
             User user = db.UserSet.Find(id);
+
             if (user == null)
             {
                 return Content("Resim bulunamadı");
             }
+
             byte[] file = user.Avatar;
 
             return File(file, ImageHelper.GetContentType(file).ToString());

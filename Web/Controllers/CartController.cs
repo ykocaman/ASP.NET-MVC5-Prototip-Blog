@@ -22,7 +22,7 @@ namespace Web.Controllers
 
         public ActionResult PayForm(){
             var carts = getCarts();
-            if (carts.Count() > 0)
+            if (carts != null && carts.Count() > 0)
             {
                 ViewBag.Amount = carts.Sum(q => q.Project.Price);
                 return View();
@@ -70,8 +70,13 @@ namespace Web.Controllers
 
         private IQueryable<Cart> getCarts()
         {
-            int userId = UserHelper.Current().Id;
-            return db.CartSet.Where(q => q.UserId == userId && q.Status == Data.CartStatus.New);
+            if (UserHelper.isMember() == true)
+            {
+                int userId = UserHelper.Current().Id;
+                return db.CartSet.Where(q => q.UserId == userId && q.Status == Data.CartStatus.New);
+            }
+
+            return null;
         }
     }
 }
